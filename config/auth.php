@@ -45,6 +45,11 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        'wechat' => [
+            'driver' => 'passport',
+            'provider' => 'wechat',
+        ],
+
     ],
 
     /*
