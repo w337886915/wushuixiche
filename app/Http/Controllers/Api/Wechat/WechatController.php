@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class WechatController extends Controller
 {
     //
-    public function getAccessToken(Wechat $wechat){
-        $wechat->getAccessToken('033tGDwK01ZBy825bBvK0W8EwK0tGDwA');
+    public function getAccessToken(Wechat $wechat,Request $request){
+        $wechat->getAccessToken($request->input('code'));
     }
 }

@@ -26,8 +26,9 @@ class Wechat extends Authenticatable
     //获取acctoken
     public function getAccessToken($code){
         $http = new Client();
+        echo $code;die;
         $res = $http->get('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx4ff2f7cd3f7243f1&secret=48a1192f1afa54cfb9c2cf3e86a48833&code='.$code.'&grant_type=authorization_code');
-        dd($res);
+        dd($res->getBody());
     }
 
 
