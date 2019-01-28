@@ -10,6 +10,7 @@ use Laravel\Passport\HasApiTokens;
 
 class Wechat extends Authenticatable
 {
+    protected $table = 'users';
     private $wxappid = 'wx4ff2f7cd3f7243f1';
     private $wxsecret = '48a1192f1afa54cfb9c2cf3e86a48833';
     use Notifiable,HasApiTokens;
@@ -20,11 +21,7 @@ class Wechat extends Authenticatable
 
     public function validateForPassportPasswordGrant($password)
     {
-        $decrypted = Crypt::decryptString($password);
-        if ($decrypted == $this->openId) {
-            return true;
-        }
-        return false;
+        return true;
     }
 //    //获取acctoken
 //    public function getAccessToken($code){
@@ -92,7 +89,7 @@ class Wechat extends Authenticatable
         return  $data;
     }
     public function register($data){
-        $this->create($data);
+        return $this->insert($data);
     }
     //passport授权登陆
     public function login($unionid)

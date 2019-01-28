@@ -11,14 +11,15 @@ class WechatController extends Controller
     //
     public function getAccessToken(Wechat $wechat,Request $request){
         $data = $wechat->getAccessToken($request->post());
+	$data = json_decode($data);
         //查询并注册用户
        $user = $wechat->findForPassport($data->unionId);
        if(!$user){
-           $data['name'] = $data->openId;
-           $data['unionid'] = $data->unionId;
-           $user = $wechat->register($data);
+           $adddata['name'] = $data->openId;
+           $adddata['unionid'] = $data->unionId;
+	   $user = $wechat->register($adddata);
        }
-        $data = $wechat->login($data->unionid);
-        return response($data);
+        $returndata = $wechat->login($data->unionId);
+        return response($returndata);
     }
 }
