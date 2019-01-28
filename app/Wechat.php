@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-use GuzzleHttp\Client;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -25,10 +23,13 @@ class Wechat extends Authenticatable
     }
     //获取acctoken
     public function getAccessToken($code){
-        $http = new Client();
-        echo $code;die;
-        $res = $http->get('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx4ff2f7cd3f7243f1&secret=48a1192f1afa54cfb9c2cf3e86a48833&code='.$code.'&grant_type=authorization_code');
-        dd($res->getBody());
+        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid=yourAppid&secret=appSecret&js_code=' . $code . '&grant_type=authorization_code';
+        //yourAppid为开发者appid.appSecret为开发者的appsecret,都可以从微信公众平台获取；
+        $info = file_get_contents($url);//发送HTTPs请求并获取返回的数据，推荐使用curl
+        $json = json_decode($info);//对json数据解码
+        $arr = get_object_vars($json);
+        var_dump($arr);
+
     }
 
 
