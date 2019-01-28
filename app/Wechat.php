@@ -15,7 +15,7 @@ class Wechat extends Authenticatable
     use Notifiable,HasApiTokens;
 
     public function findForPassport($username) {
-        return $this->where('openId', $username)->first();
+        return $this->where('unionid', $username)->first();
     }
 
     public function validateForPassportPasswordGrant($password)
@@ -91,6 +91,26 @@ class Wechat extends Authenticatable
         $data = $result;
         return  $data;
     }
+    public function register($data){
+        $this->create($data);
+    }
+    //passport授权登陆
+    public function login($unionid)
+    {
+        $http = new \GuzzleHttp\Client();
 
+        $response = $http->post('https://weixin.whgjh.top/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => '2',
+                'client_secret' => 'ANfut0P5nOY3l76AuIQRKKVCy8Exk02Ozyk4GYoh',
+                'username' => $unionid,
+                'password' => '*',
+                'scope' => '',
+            ],
+        ]);
+
+        return json_decode((string)$response->getBody(), true);
+    }
 
 }
