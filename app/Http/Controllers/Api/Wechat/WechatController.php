@@ -10,6 +10,6 @@ class WechatController extends Controller
 {
     //
     public function getAccessToken(Wechat $wechat,Request $request){
-        $wechat->getAccessToken($request->input('code'));
+        $wechat->getAccessToken($request->post());
     }
 }
