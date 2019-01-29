@@ -92,9 +92,9 @@ class Wechat extends Authenticatable
         return $this->insert($data);
     }
     //passport授权登陆
-    public function login($userinfo)
+    public function login($user)
     {
-        return $this->createToken($userinfo->name)->accessToken;
+        return $user->createToken($user->name)->accessToken;
     }
 
 }

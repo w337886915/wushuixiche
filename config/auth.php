@@ -40,15 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
-        ],
-        'wechat' => [
-            'driver' => 'passport',
-            'provider' => 'wechat',
-        ],
+        ]
 
     ],
 
