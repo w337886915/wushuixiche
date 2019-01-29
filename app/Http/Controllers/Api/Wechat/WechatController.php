@@ -19,7 +19,7 @@ class WechatController extends Controller
            $adddata['unionid'] = $data->unionId;
 	   $user = $wechat->register($adddata);
        }
-        $returndata = $wechat->login($data->unionId);
+        $returndata = $wechat->login($user);
         return response($returndata);
     }
 }

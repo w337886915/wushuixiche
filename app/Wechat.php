@@ -92,22 +92,9 @@ class Wechat extends Authenticatable
         return $this->insert($data);
     }
     //passport授权登陆
-    public function login($unionid)
+    public function login($userinfo)
     {
-        $http = new \GuzzleHttp\Client();
-
-        $response = $http->post('https://weixin.whgjh.top/oauth/token', [
-            'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => '2',
-                'client_secret' => 'ANfut0P5nOY3l76AuIQRKKVCy8Exk02Ozyk4GYoh',
-                'username' => $unionid,
-                'password' => '*',
-                'scope' => '',
-            ],
-        ]);
-
-        return json_decode((string)$response->getBody(), true);
+        return $this->createToken($userinfo->name)->accessToken;
     }
 
 }
